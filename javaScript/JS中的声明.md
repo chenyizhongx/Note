@@ -12,7 +12,7 @@
 上面的代码不会报错，而是输出 undefined，这是由于js 中变量的声明提升，所以不会报错，但也只是声明提升，**赋值操作没有提升**，所以不会输出 1，而是undefined。
 
 
-  		function do_something() {
+        function do_something() {
           console.log(bar); // undefined
           var bar = 111;
           console.log(bar); // 111
@@ -29,7 +29,7 @@
 
 - 赋值给未声明的变量，当执行时会隐式创建全局变量（成为global的属性）。
 
-######声明变量和未说明变量的区别
+###### 声明变量和未声明变量的区别
 - 声明变量通常是局部的，未声明变量通常全局的。
 - 声明变量在任意代码执行前创建，*未声明变量直到赋值时才存在*。
 - 声明变量是execution context（function/global）的non-configurable 属性，未声明变量则是configurable。
@@ -163,4 +163,8 @@ JS变量的域使根据方法块来划分的（也就是说以function的一对 
 	*/
 注意：函数声明比变量声明优先级高
 
+参考资料：
+- https://github.com/creeperyang/blog/issues/16
+- https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/var
+- https://www.w3cplus.com/javascript/the-basics-of-variable-scope-in-javascript.html
 
