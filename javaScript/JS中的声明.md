@@ -163,4 +163,8 @@ JS变量的域使根据方法块来划分的（也就是说以function的一对 
 	*/
 注意：函数声明比变量声明优先级高
 
+参考资料：
+- https://github.com/creeperyang/blog/issues/16
+- https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/var
+- https://www.w3cplus.com/javascript/the-basics-of-variable-scope-in-javascript.html
 
