@@ -5,23 +5,26 @@
 - 变量声明，无论发生在什么时候，都会在执行任何代码前进行处理。
 - 用var声明的变量的作用域是它当前的执行上下文，它可以是嵌套的函数，也可以是声明在任何函数外的变量。
 
-      console.log(a); // undefined
-      var a = 1;
+
+
+        console.log(a); // undefined
+        var a = 1;
 上面的代码不会报错，而是输出 undefined，这是由于js 中变量的声明提升，所以不会报错，但也只是声明提升，**赋值操作没有提升**，所以不会输出 1，而是undefined。
 
-    function do_something() {
-      console.log(bar); // undefined
-      var bar = 111;
-      console.log(bar); // 111
-    }
+
+  		function do_something() {
+          console.log(bar); // undefined
+          var bar = 111;
+          console.log(bar); // 111
+        }
     
-    // is implicitly understood as: 
-    function do_something() {
-      var bar;
-      console.log(bar); // undefined
-      bar = 111;
-      console.log(bar); // 111
-    }
+        // is implicitly understood as: 
+        function do_something() {
+   		  var bar;
+  	      console.log(bar); // undefined
+          bar = 111;
+          console.log(bar); // 111
+        }
 
 
 - 赋值给未声明的变量，当执行时会隐式创建全局变量（成为global的属性）。
@@ -74,7 +77,7 @@
     console.log(variable); // local
     console.log(myVariable)  // local
 在全局作用域中声明变量可以省略 var 关键字，但如果在函数体内，即局部作用域中声明变量时省略 var 关键字，则会导致声明覆盖，使得输出值全部为local。
-#### 三 声明提升
+## 三 声明提升
 在JS的声明提升中，需要综合考虑一般变量和函数。
 在JavaScript中，一个变量名进入作用域的方式有 4 种：
 
@@ -119,6 +122,45 @@
 		console.log(a); // 2
 	}
 	cheak();
+## 四 总结
+JS变量的域使根据方法块来划分的（也就是说以function的一对 { }来划分）
+注意：**是function块，而不是for、while和if块**，在JS中没有块级作用域
 
+	var a = 1;
+	
+	function cheak() {
+		console.log(a);   　 // undefined
+		a = 2;
+		console.log(a);       //  2
+		var a;
+		console.log(a);     // 2
+	}
+	
+	cheak();
+	console.log(a);     // 1
+以及
+
+
+    function testOrder(arg) {
+	  console.log(arg); // arg是形参，不会被重新定义
+	  console.log(a);        // 因为函数声明比变量声明优先级高，所以这里a是函数
+	  var arg = 'hello'; // var arg;变量声明被忽略， arg = 'hello'被执行
+	  var a = 10; // var a;被忽视; a = 10被执行，a变成number
+	  function a() {
+	    console.log('fun');
+	  } // 被提升到作用域顶部
+	  console.log(a); // 输出10
+	  console.log(arg); // 输出hello
+	}; 
+	testOrder('hi');
+	/* 输出：
+	hi 
+	function a() {
+	        console.log('fun');
+	    }
+	10 
+	hello 
+	*/
+注意：函数声明比变量声明优先级高
 
 
